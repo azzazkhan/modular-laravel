@@ -15,6 +15,15 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->app->singleton(RoutingService::class);
 
+        /** @var array<class-string> $commands */
+        $commands = collect(File::glob(__DIR__ . '/../Console/Commands/*.php'))
+            ->map(fn (string $path) => substr(last(explode('/', $path)), 0, -4))
+            ->filter(fn (string $class) => $class != 'Generator')
+            ->map(fn (string $class) => "Azzazkhan\\ModularLaravel\\Console\\Commands\\$class")
+            ->toArray();
+
+        $this->commands($commands);
+
         $namespace = config('modules.namespace', 'Modules');
         $filepath = base_path('modules/{name}/app/Providers/{name}ServiceProvider.php');
         $namespace = "$namespace\\{name}\\Providers\\{name}ServiceProvider";
@@ -33,6 +42,6 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config.php' => config_path('modules.php'),
-        ]);
+        ], 'modules-config');
     }
 }

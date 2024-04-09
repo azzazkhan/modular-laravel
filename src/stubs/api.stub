@@ -1,0 +1,5 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', fn () => ['message' => 'Response generated from {{ file_path }}'])->name('index');

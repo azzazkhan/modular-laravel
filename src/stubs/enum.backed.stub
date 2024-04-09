@@ -1,0 +1,12 @@
+<?php
+
+namespace {{ namespace }};
+
+use ArchTech\Enums\Values;
+
+enum {{ class }}: {{ type }}
+{
+    use Values;
+
+    //
+}

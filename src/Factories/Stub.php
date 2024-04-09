@@ -161,7 +161,7 @@ class Stub
             'imports' => $this->getImports(),
         ]);
 
-        $content = File::get(base_path($stub_path));
+        $content = File::get($stub_path);
         $content = $this->parseContent($content, $replacements);
 
         File::ensureDirectoryExists(dirname($abs_path));

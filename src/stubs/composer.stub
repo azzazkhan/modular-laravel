@@ -1,0 +1,21 @@
+{
+    "name": "modules/{{ module_key }}",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "{{ module_namespace }}\\": "app/",
+            "{{ module_namespace }}\\Database\\Factories\\": "database/factories/",
+            "{{ module_namespace }}\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "{{ module_namespace }}\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": []
+        }
+    }
+}
