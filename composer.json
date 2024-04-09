@@ -1,0 +1,33 @@
+{
+    "name": "azzazkhan/modular-laravel",
+    "description": "Add modularization in your Laravel application",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Azzaz Khan",
+            "email": "25636920+azzazkhan@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "archtechx/enums": "^1.0",
+        "laravel/framework": "^11.0",
+        "wikimedia/composer-merge-plugin": "^2.1"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "Azzazkhan\\ModularLaravel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Azzazkhan\\ModularLaravel\\Providers\\ModuleServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
