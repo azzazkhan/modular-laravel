@@ -29,8 +29,8 @@ class GenerateMiddleware extends Generator
      */
     public function handle(): void
     {
-        [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Http/Middlewares');
-        [$path, $namespace] = ["$path/$class.php", $this->namespace(['Http/Middlewares', $prefix])];
+        [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Http/Middleware');
+        [$path, $namespace] = ["$path/$class.php", $this->namespace(['Http/Middleware', $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {
             return;
@@ -41,5 +41,13 @@ class GenerateMiddleware extends Generator
         $this->makeStub('middleware')->withReplacements($replacements)->publish($path);
 
         $this->components->info("Middleware [$path] created successfully.");
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'Http/Middleware/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }

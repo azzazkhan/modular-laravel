@@ -36,6 +36,7 @@ class GenerateView extends Generator
         $extension = $this->option('extension') ?? 'blade.php';
         $name = preg_replace('/\//', '.', $this->argument('name'));
         $path = array_map(fn (string $segment) => Str::kebab($segment), explode('.', $name));
+        $view_path = implode('.', $path);
 
         $view = last($path);
         $path = count($path) > 1 ? implode('/', array_slice($path, 0, -1)) : '';
@@ -50,5 +51,18 @@ class GenerateView extends Generator
         $this->makeStub('view')->withReplacements($replacements)->publish($path);
 
         $this->components->info("View [$path] created successfully.");
+
+        if ($this->isOptionEnabled('test')) {
+            $test_path = array_map(fn (string $s) => Str::studly($s), explode('.', $name));
+            [$class, $path, $prefix] = $this->extractClassDetails(implode('/', $test_path), 'tests/Feature/View');
+            $class = str_remove_suffix($class, 'test') . 'Test';
+            [$path, $namespace] = ["$path/$class.php", $this->namespace(['Tests\\Feature\\View', $prefix, $class])];
+
+            $replacements = ['class' => $class, 'namespace' => $namespace, 'view' => $this->moduleKey() . '::' . $view_path];
+
+            $this->makeStub('view.pest')->withReplacements($replacements)->publish($path);
+
+            $this->components->info("Test [$path] created successfully.");
+        }
     }
 }

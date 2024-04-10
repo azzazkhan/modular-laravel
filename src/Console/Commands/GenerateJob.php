@@ -43,5 +43,13 @@ class GenerateJob extends Generator
         $this->makeStub($stub)->withReplacements($replacements)->publish($path);
 
         $this->components->info("Job [$path] created successfully.");
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'Jobs/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }

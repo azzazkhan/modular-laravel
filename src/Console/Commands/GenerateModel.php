@@ -61,5 +61,13 @@ class GenerateModel extends Generator
         $this->makeStub($stub)->withReplacements($replacements)->publish($path);
 
         $this->components->info("Model [$path] created successfully.");
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'Models/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }

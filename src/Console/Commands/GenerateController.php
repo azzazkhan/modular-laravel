@@ -56,5 +56,13 @@ class GenerateController extends Generator
         $this->makeStub($stub)->withReplacements($replacements)->publish($path);
 
         $this->components->info("Controller [$path] created successfully.");
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'Http/Controllers/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }

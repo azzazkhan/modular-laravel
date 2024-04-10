@@ -42,8 +42,8 @@ class GenerateListener extends Generator
 
         if ($event = $this->option('event')) {
             $stub = $this->isOptionEnabled('queued') ? 'listener.typed.queued' : 'listener.typed';
-            [$event, , $prefix] = $this->extractClassDetails($event);
-            $replacements['event_namespace'] = $this->namespace(['Events', $prefix, $event]);
+            [$event, , $event_prefix] = $this->extractClassDetails($event);
+            $replacements['event_namespace'] = $this->namespace(['Events', $event_prefix, $event]);
             $replacements['event'] = $event;
         }
         else {
@@ -53,5 +53,13 @@ class GenerateListener extends Generator
         $this->makeStub($stub)->withReplacements($replacements)->publish($path);
 
         $this->components->info("Listener [$path] created successfully.");
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'Listeners/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }

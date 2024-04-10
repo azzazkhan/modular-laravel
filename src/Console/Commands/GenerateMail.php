@@ -56,5 +56,13 @@ class GenerateMail extends Generator
 
             $this->components->info("Markdown [$view_path] created successfully.");
         }
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'Mail/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }

@@ -64,7 +64,7 @@ class GenerateComponent extends Generator
         $replacements = [
             'namespace' => $namespace,
             'class' => $class,
-            'view' => sprintf("view('%s::%s');", $this->moduleKey(), $view_name),
+            'view' => sprintf("view('%s::%s')", $this->moduleKey(), $view_name),
         ];
 
         if ($inline) {
@@ -86,5 +86,13 @@ class GenerateComponent extends Generator
         }
 
         $this->call('module:view', ['name' => $view_name, '--module' => $this->option('module'), '--force' => true]);
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'View/Components/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }

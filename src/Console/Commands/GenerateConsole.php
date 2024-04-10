@@ -57,5 +57,13 @@ class GenerateConsole extends Generator
         $this->makeStub('console')->withReplacements($replacements)->publish($path);
 
         $this->components->info("Console command [$path] created successfully.");
+
+        if ($this->isOptionEnabled('test')) {
+            $this->call(GenerateTest::class, [
+                'name' => 'Console/Commands/' . ltrim("$prefix/$class", '/'),
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
     }
 }
