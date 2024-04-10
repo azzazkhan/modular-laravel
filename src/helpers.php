@@ -79,16 +79,16 @@ if (!function_exists('str_remove_suffix')) {
      * Removes specified prefix from end the provided string.
      *
      * @param  string  $string
-     * @param  string  $prefix
+     * @param  string  $suffix
      * @param  bool  $strict
      * @return string
      */
-    function str_remove_suffix(string $string, string $prefix, bool $strict = false): string
+    function str_remove_suffix(string $string, string $suffix, bool $strict = false): string
     {
-        $prefix = $strict ? strtolower($prefix) : $prefix;
+        $suffix = $strict ? strtolower($suffix) : $suffix;
         $flags = $strict ? '' : 'i';
-        $search = str_replace(['/'], ['\/'], $prefix);
+        $search = str_replace(['/'], ['\/'], $suffix);
 
-        return preg_match(sprintf('/.*(%s)$/%s', $search, $flags), $string) ? substr($string, 0, -strlen($prefix)) : $string;
+        return preg_match(sprintf('/.*(%s)$/%s', $search, $flags), $string) ? substr($string, 0, -strlen($suffix)) : $string;
     }
 }

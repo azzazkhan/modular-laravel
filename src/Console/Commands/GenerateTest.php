@@ -34,15 +34,16 @@ class GenerateTest extends Generator
         $unit = $this->isOptionEnabled('unit');
         $path = $unit ? 'tests/Unit' : 'tests/Feature';
         $namespace = $unit ? 'Tests/Unit' : 'Tests/Feature';
+        $name = str_remove_suffix($this->argument('name'), 'test');
 
-        [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), $path);
-        [$path, $namespace] = ["$path/$class.php", $this->namespace([$namespace, $prefix])];
+        [$class, $path, $prefix] = $this->extractClassDetails($name, $path);
+        [$path, $namespace] = ["$path/{$class}Test.php", $this->namespace([$namespace, $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {
             return;
         }
 
-        $replacements = ['class' => $class, 'namespace' => $namespace];
+        $replacements = ['class' => $class . 'Test', 'namespace' => $namespace];
 
         $stub = match (true) {
             $this->option('phpunit') && $unit => 'test.unit',
