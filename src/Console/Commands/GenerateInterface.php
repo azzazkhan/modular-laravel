@@ -14,7 +14,7 @@ class GenerateInterface extends Generator
     protected $signature = 'module:interface
                             {name : Name of the interface}
                             {--module= : Name of the module}
-                            {--force : Create the interface even if the interface already exists}';
+                            {--f|force : Create the interface even if the interface already exists}';
 
     /**
      * The console command description.

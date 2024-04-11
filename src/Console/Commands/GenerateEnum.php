@@ -14,9 +14,9 @@ class GenerateEnum extends Generator
     protected $signature = 'module:enum
                             {name : Name of the enum}
                             {--module= : Name of the module}
-                            {--force : Create the enum even if the enum already exists}
-                            {--string : Generate a string backed enum}
-                            {--int : Generate an integer backed enum}';
+                            {--f|force : Create the enum even if the enum already exists}
+                            {--s|string : Generate a string backed enum}
+                            {--i|int : Generate an integer backed enum}';
 
     /**
      * The console command description.

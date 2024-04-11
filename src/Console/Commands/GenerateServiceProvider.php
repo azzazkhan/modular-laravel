@@ -14,7 +14,7 @@ class GenerateServiceProvider extends Generator
     protected $signature = 'module:provider
                             {name : The name of the provider}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the provider already exists}';
+                            {--f|force : Create the class even if the provider already exists}';
 
     /**
      * The console command description.

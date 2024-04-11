@@ -14,11 +14,11 @@ class GenerateController extends Generator
     protected $signature = 'module:controller
                             {name : Name of the Eloquent model}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the controller already exists}
+                            {--f|force : Create the class even if the controller already exists}
                             {--api : Create a new controller for the model}
-                            {--invokable :  Generate a single method, invokable controller class}
-                            {--requests : Generate FormRequest classes for store and update}
-                            {--test : Generate an accompanying Pest test for the controller}';
+                            {--i|invokable :  Generate a single method, invokable controller class}
+                            {--r|requests : Generate FormRequest classes for store and update}
+                            {--t|test : Generate an accompanying Pest test for the controller}';
 
     /**
      * The console command description.

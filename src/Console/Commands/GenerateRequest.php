@@ -14,7 +14,7 @@ class GenerateRequest extends Generator
     protected $signature = 'module:request
                             {name : The name of the request}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the request already exists}';
+                            {--f|force : Create the class even if the request already exists}';
 
     /**
      * The console command description.

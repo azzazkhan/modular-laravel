@@ -18,8 +18,8 @@ class GenerateView extends Generator
                             {name : Name of the view}
                             {--module= : Name of the module}
                             {--extension= : The extension of the generated view [default: "blade.php"]}
-                            {--force : Create the view even if the view already exists}
-                            {--test : Generate an accompanying Pest test for the view}';
+                            {--f|force : Create the view even if the view already exists}
+                            {--t|test : Generate an accompanying Pest test for the view}';
 
     /**
      * The console command description.
@@ -35,7 +35,7 @@ class GenerateView extends Generator
     {
         $extension = $this->option('extension') ?? 'blade.php';
         $name = preg_replace('/\//', '.', $this->argument('name'));
-        $path = array_map(fn (string $segment) => Str::kebab($segment), explode('.', $name));
+        $path = array_map(fn(string $segment) => Str::kebab($segment), explode('.', $name));
         $view_path = implode('.', $path);
 
         $view = last($path);
@@ -53,7 +53,7 @@ class GenerateView extends Generator
         $this->components->info("View [$path] created successfully.");
 
         if ($this->isOptionEnabled('test')) {
-            $test_path = array_map(fn (string $s) => Str::studly($s), explode('.', $name));
+            $test_path = array_map(fn(string $s) => Str::studly($s), explode('.', $name));
             [$class, $path, $prefix] = $this->extractClassDetails(implode('/', $test_path), 'tests/Feature/View');
             $class = str_remove_suffix($class, 'test') . 'Test';
             [$path, $namespace] = ["$path/$class.php", $this->namespace(['Tests\\Feature\\View', $prefix, $class])];

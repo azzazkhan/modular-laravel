@@ -14,7 +14,7 @@ class GenerateException extends Generator
     protected $signature = 'module:exception
                             {name : Name of the exception}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the exception already exists}
+                            {--f|force : Create the class even if the exception already exists}
                             {--render : Create the exception with an empty render method}
                             {--report : Create the exception with an empty report method}';
 

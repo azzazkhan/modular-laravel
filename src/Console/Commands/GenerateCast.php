@@ -14,7 +14,7 @@ class GenerateCast extends Generator
     protected $signature = 'module:cast
                             {name : Name of the cast}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the cast already exists}
+                            {--f|force : Create the class even if the cast already exists}
                             {--inbound : Generate an inbound cast class}';
 
     /**

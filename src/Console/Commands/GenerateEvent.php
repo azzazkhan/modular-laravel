@@ -14,7 +14,7 @@ class GenerateEvent extends Generator
     protected $signature = 'module:event
                             {name : Name of the event}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the event already exists}';
+                            {--f|force : Create the class even if the event already exists}';
 
     /**
      * The console command description.

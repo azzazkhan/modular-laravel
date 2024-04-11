@@ -14,7 +14,7 @@ class GenerateFactory extends Generator
     protected $signature = 'module:factory
                             {name : Name of the factory}
                             {--module= : Name of the module}
-                            {--model= : The name of the model}';
+                            {--m|model= : The name of the model}';
 
     /**
      * The console command description.
@@ -62,7 +62,7 @@ class GenerateFactory extends Generator
     }
 
     /**
-     * @param  string  $name
+     * @param string $name
      * @return string
      */
     protected function normalizeFactoryName(string $name): string
@@ -75,8 +75,8 @@ class GenerateFactory extends Generator
     }
 
     /**
-     * @param  string  $factory
-     * @param  string  $prefix
+     * @param string $factory
+     * @param string $prefix
      * @return array<string>
      */
     protected function guessModel(string $factory, string $prefix): array

@@ -16,9 +16,9 @@ class GenerateNotification extends Generator
     protected $signature = 'module:notification
                             {name : Name of the notification}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the notification already exists}
-                            {--markdown : Create a new markdown template for the notification}
-                            {--test : Generate an accompanying Pest test for the notification}';
+                            {--f|force : Create the class even if the notification already exists}
+                            {--m|markdown : Create a new markdown template for the notification}
+                            {--t|test : Generate an accompanying Pest test for the notification}';
 
     /**
      * The console command description.
@@ -34,7 +34,7 @@ class GenerateNotification extends Generator
     {
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Notifications');
         [$path, $namespace] = ["$path/$class.php", $this->namespace(['Notifications', $prefix])];
-        $view_path = array_map(fn (string $s) => Str::kebab($s), explode('/', substr($path, 18, -4)));
+        $view_path = array_map(fn(string $s) => Str::kebab($s), explode('/', substr($path, 18, -4)));
         $view_name = $this->moduleKey() . '::notifications.' . implode('.', $view_path);
         $view_path = 'resources/views/notifications/' . implode('/', $view_path) . '.blade.php';
 

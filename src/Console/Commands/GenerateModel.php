@@ -15,15 +15,15 @@ class GenerateModel extends Generator
                             {name : Name of the Eloquent model}
                             {--module= : Name of the module}
                             {--force : Create the class even if the model already exists}
-                            {--controller : Create a new controller for the model}
-                            {--factory : Create a new factory for the model}
-                            {--migration : Create a new migration file for the model}
+                            {--c|controller : Create a new controller for the model}
+                            {--f|factory : Create a new factory for the model}
+                            {--m|migration : Create a new migration file for the model}
                             {--morph-pivot : Indicates if the generated model should be a custom polymorphic intermediate table model}
-                            {--policy : Create a new policy for the model}
-                            {--seed : Create a new seeder for the model}
+                            {--p|policy : Create a new policy for the model}
+                            {--s|seed : Create a new seeder for the model}
                             {--pivot : Indicates if the generated model should be a custom intermediate table model}
                             {--api : Indicates if the generated controller should be an API controller}
-                            {--test : Generate an accompanying Pest test for the model}';
+                            {--t|test : Generate an accompanying Pest test for the model}';
 
     /**
      * The console command description.

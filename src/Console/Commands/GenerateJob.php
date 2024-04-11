@@ -14,9 +14,9 @@ class GenerateJob extends Generator
     protected $signature = 'module:job
                             {name : Name of the job}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the job already exists}
+                            {--f|force : Create the class even if the job already exists}
                             {--sync : Indicates that job should be synchronous}
-                            {--test : Generate an accompanying Pest test for the job}';
+                            {--t|test : Generate an accompanying Pest test for the job}';
 
     /**
      * The console command description.

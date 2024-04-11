@@ -16,9 +16,9 @@ class GenerateConsole extends Generator
     protected $signature = 'module:command
                             {name : The name of the command}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the console command already exists}
+                            {--f|force : Create the class even if the console command already exists}
                             {--command= : The terminal command that will be used to invoke the class}
-                            {--test : Generate an accompanying Pest test for the Console command}';
+                            {--t|test : Generate an accompanying Pest test for the Console command}';
 
     /**
      * The console command description.
@@ -43,8 +43,7 @@ class GenerateConsole extends Generator
 
         if (($command = $this->option('command'))) {
             $command = str_contains($command, ':') ? $command : "$module:$command";
-        }
-        else {
+        } else {
             $command = "$module:" . Str::kebab($class);
         }
 

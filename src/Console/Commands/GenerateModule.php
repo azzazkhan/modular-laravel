@@ -11,7 +11,7 @@ class GenerateModule extends Generator
      */
     protected $signature = 'module:make
                             {name : The name of the module}
-                            {--force : Create the module even if the module already exists}
+                            {--f|force : Create the module even if the module already exists}
                             {--api : Whether to register API routes for the module}';
 
     /**

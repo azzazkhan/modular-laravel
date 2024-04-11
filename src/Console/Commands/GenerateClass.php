@@ -14,8 +14,8 @@ class GenerateClass extends Generator
     protected $signature = 'module:class
                             {name : The name of the class}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the class already exists}
-                            {--invokable : Generate a single method, invokable class}';
+                            {--f|force : Create the class even if the class already exists}
+                            {--i|invokable : Generate a single method, invokable class}';
 
     /**
      * The console command description.

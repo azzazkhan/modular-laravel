@@ -16,8 +16,8 @@ class GenerateObserver extends Generator
     protected $signature = 'module:observer
                             {name : Name of the observer}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the observer already exists}
-                            {--model= : The model that the observer applies to}';
+                            {--f|force : Create the class even if the observer already exists}
+                            {--m|model= : The model that the observer applies to}';
 
     /**
      * The console command description.

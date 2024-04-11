@@ -14,7 +14,7 @@ class GenerateTrait extends Generator
     protected $signature = 'module:trait
                             {name : Name of the trait}
                             {--module= : Name of the module}
-                            {--force : Create the trait even if the trait already exists}';
+                            {--f|force : Create the trait even if the trait already exists}';
 
     /**
      * The console command description.

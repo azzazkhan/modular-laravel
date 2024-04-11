@@ -16,9 +16,9 @@ class GenerateMail extends Generator
     protected $signature = 'module:mail
                             {name : Name of the mailable}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the mailable already exists}
-                            {--markdown : Create a new markdown template for the mailable}
-                            {--test : Generate an accompanying Pest test for the Mailable}';
+                            {--f|force : Create the class even if the mailable already exists}
+                            {--m|markdown : Create a new markdown template for the mailable}
+                            {--t|test : Generate an accompanying Pest test for the Mailable}';
 
     /**
      * The console command description.
@@ -34,7 +34,7 @@ class GenerateMail extends Generator
     {
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Mail');
         [$path, $namespace] = ["$path/$class.php", $this->namespace(['Mail', $prefix])];
-        $view_path = array_map(fn (string $s) => Str::kebab($s), explode('/', substr($path, 9, -4)));
+        $view_path = array_map(fn(string $s) => Str::kebab($s), explode('/', substr($path, 9, -4)));
         $view_name = $this->moduleKey() . '::mail.' . implode('.', $view_path);
         $view_path = 'resources/views/mail/' . implode('/', $view_path) . '.blade.php';
 

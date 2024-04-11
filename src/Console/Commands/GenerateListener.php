@@ -14,10 +14,10 @@ class GenerateListener extends Generator
     protected $signature = 'module:listener
                             {name : Name of the listener}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the listener already exists}
-                            {--event= : The event class being listened for}
+                            {--e|event= : The event class being listened for}
+                            {--f|force : Create the class even if the listener already exists}
                             {--queued : Indicates the event listener should be queued}
-                            {--test : Generate an accompanying Pest test for the listener}';
+                            {--t|test : Generate an accompanying Pest test for the listener}';
 
     /**
      * The console command description.
@@ -45,8 +45,7 @@ class GenerateListener extends Generator
             [$event, , $event_prefix] = $this->extractClassDetails($event);
             $replacements['event_namespace'] = $this->namespace(['Events', $event_prefix, $event]);
             $replacements['event'] = $event;
-        }
-        else {
+        } else {
             $stub = $this->isOptionEnabled('queued') ? 'listener.queued' : 'listener';
         }
 

@@ -14,7 +14,7 @@ class GenerateChannel extends Generator
     protected $signature = 'module:channel
                             {name : Name of the channel}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the channel already exists}';
+                            {--f|force : Create the class even if the channel already exists}';
 
     /**
      * The console command description.

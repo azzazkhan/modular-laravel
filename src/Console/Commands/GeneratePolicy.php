@@ -17,8 +17,8 @@ class GeneratePolicy extends Generator
     protected $signature = 'module:policy
                             {name : Name of the policy}
                             {--module= : Name of the module}
-                            {--model= : The model that the policy applies to}
-                            {--force : Create the class even if the policy already exists}';
+                            {--f|force : Create the class even if the policy already exists}
+                            {--m|model= : The model that the policy applies to}';
 
     /**
      * The console command description.
@@ -68,7 +68,7 @@ class GeneratePolicy extends Generator
     }
 
     /**
-     * @param  string  $name
+     * @param string $name
      * @return string
      */
     protected function normalizePolicyName(string $name): string

@@ -14,7 +14,7 @@ class GenerateScope extends Generator
     protected $signature = 'module:scope
                             {name : The name of the scope}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the scope already exists}';
+                            {--f|force : Create the class even if the scope already exists}';
 
     /**
      * The console command description.

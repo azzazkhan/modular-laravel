@@ -14,7 +14,7 @@ class GenerateContract extends Generator
     protected $signature = 'module:contract
                             {name : Name of the contract}
                             {--module= : Name of the module}
-                            {--force : Create the interface even if the contract already exists}';
+                            {--f|force : Create the interface even if the contract already exists}';
 
     /**
      * The console command description.

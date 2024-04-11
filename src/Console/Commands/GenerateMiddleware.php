@@ -14,8 +14,8 @@ class GenerateMiddleware extends Generator
     protected $signature = 'module:middleware
                             {name : Name of the middleware}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the middleware already exists}
-                            {--test : Generate an accompanying Pest test for the middleware}';
+                            {--f|force : Create the class even if the middleware already exists}
+                            {--t|test : Generate an accompanying Pest test for the middleware}';
 
     /**
      * The console command description.

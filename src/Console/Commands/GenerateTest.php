@@ -14,8 +14,8 @@ class GenerateTest extends Generator
     protected $signature = 'module:test
                             {name : Name of the test}
                             {--module= : Name of the module}
-                            {--force : Create the test even if the test already exists}
-                            {--unit : Create a unit test}
+                            {--f|force : Create the test even if the test already exists}
+                            {--u|unit : Create a unit test}
                             {--pest : Create a Pest test}
                             {--phpunit : Create a PHPUnit test}';
 

@@ -14,8 +14,8 @@ class GenerateRule extends Generator
     protected $signature = 'module:rule
                             {name : The name of the rule}
                             {--module= : Name of the module}
-                            {--force : Create the class even if the rule already exists}
-                            {--implicit : Generate an implicit rule}';
+                            {--f|force : Create the class even if the rule already exists}
+                            {--i|implicit : Generate an implicit rule}';
 
     /**
      * The console command description.

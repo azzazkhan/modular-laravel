@@ -15,7 +15,7 @@ class GenerateConcern extends Generator
                             {name : Name of the concern}
                             {--module= : Name of the module}
                             {--eloquent : Indicates if the concern is for an Eloquent model}
-                            {--force : Create the trait even if the concern already exists}';
+                            {--f|force : Create the trait even if the concern already exists}';
 
     /**
      * The console command description.
