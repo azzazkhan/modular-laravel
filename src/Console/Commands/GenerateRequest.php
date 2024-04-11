@@ -39,6 +39,6 @@ class GenerateRequest extends Generator
 
         $this->makeStub('request')->withReplacements($replacements)->publish($path);
 
-        $this->components->info("Class [$path] created successfully.");
+        $this->components->info("Request [$path] created successfully.");
     }
 }

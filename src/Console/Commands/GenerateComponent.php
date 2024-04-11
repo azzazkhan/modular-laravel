@@ -18,7 +18,7 @@ class GenerateComponent extends Generator
                             {name : Name of the component}
                             {--module= : Name of the module}
                             {--f|force : Create the class even if the component already exists}
-                            {--inline :  Create a component that renders an inline view}
+                            {--i|inline :  Create a component that renders an inline view}
                             {--v|view : Create an anonymous component with only a view}
                             {--t|test : Generate an accompanying Pest test for the component}';
 

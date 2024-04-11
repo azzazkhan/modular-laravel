@@ -16,7 +16,7 @@ class GenerateListener extends Generator
                             {--module= : Name of the module}
                             {--e|event= : The event class being listened for}
                             {--f|force : Create the class even if the listener already exists}
-                            {--queued : Indicates the event listener should be queued}
+                            {--q|queued : Indicates the event listener should be queued}
                             {--t|test : Generate an accompanying Pest test for the listener}';
 
     /**

@@ -14,7 +14,7 @@ class GenerateConcern extends Generator
     protected $signature = 'module:concern
                             {name : Name of the concern}
                             {--module= : Name of the module}
-                            {--eloquent : Indicates if the concern is for an Eloquent model}
+                            {--e|eloquent : Indicates if the concern is for an Eloquent model}
                             {--f|force : Create the trait even if the concern already exists}';
 
     /**

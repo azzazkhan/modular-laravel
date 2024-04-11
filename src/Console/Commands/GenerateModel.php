@@ -2,6 +2,8 @@
 
 namespace Azzazkhan\ModularLaravel\Console\Commands;
 
+use Illuminate\Support\Str;
+
 class GenerateModel extends Generator
 {
     protected string $type = 'model';
@@ -19,6 +21,7 @@ class GenerateModel extends Generator
                             {--f|factory : Create a new factory for the model}
                             {--m|migration : Create a new migration file for the model}
                             {--morph-pivot : Indicates if the generated model should be a custom polymorphic intermediate table model}
+                            {--o|observer : Create a new observer for the model}
                             {--p|policy : Create a new policy for the model}
                             {--s|seed : Create a new seeder for the model}
                             {--pivot : Indicates if the generated model should be a custom intermediate table model}
@@ -62,9 +65,62 @@ class GenerateModel extends Generator
 
         $this->components->info("Model [$path] created successfully.");
 
+        $name = ltrim("$prefix/$class", '/');
+
+        if ($this->isOptionEnabled('controller')) {
+            $this->call(GenerateController::class, [
+                'name' => $name,
+                '--module' => $this->module(),
+                '--api' => $this->isOptionEnabled('api'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
+
+        if ($this->isOptionEnabled('factory')) {
+            $this->call(GenerateFactory::class, [
+                'name' => ltrim("$prefix/$factoryName"),
+                '--module' => $this->module(),
+                '--model' => $name,
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
+
+        if ($this->isOptionEnabled('migration')) {
+            $this->call(GenerateMigration::class, [
+                'name' => 'create_' . ($table = str_plural(Str::snake($class), '_')) . '_table',
+                '--module' => $this->module(),
+                '--create' => $table,
+            ]);
+        }
+
+        if ($this->isOptionEnabled('observer')) {
+            $this->call(GenerateObserver::class, [
+                'name' => $name,
+                '--module' => $this->module(),
+                '--model' => $name,
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
+
+        if ($this->isOptionEnabled('policy')) {
+            $this->call(GeneratePolicy::class, [
+                'name' => $name,
+                '--module' => $this->module(),
+                '--model' => $name,
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
+
+        if ($this->isOptionEnabled('seed')) {
+            $this->call(GenerateSeeder::class, [
+                'name' => $class,
+                '--module' => $this->module(),
+            ]);
+        }
+
         if ($this->isOptionEnabled('test')) {
             $this->call(GenerateTest::class, [
-                'name' => 'Models/' . ltrim("$prefix/$class", '/'),
+                'name' => 'Models/' . $name,
                 '--module' => $this->option('module'),
                 '--force' => $this->shouldForceCreate(),
             ]);

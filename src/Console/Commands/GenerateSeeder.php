@@ -28,6 +28,7 @@ class GenerateSeeder extends Generator
     public function handle(): void
     {
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'database/Seeders');
+        $class = str_remove_suffix($class, 'seeder') . 'Seeder';
         [$path, $namespace] = ["$path/$class.php", $this->namespace(['Database\\Seeders', $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {

@@ -15,7 +15,7 @@ class GenerateJob extends Generator
                             {name : Name of the job}
                             {--module= : Name of the module}
                             {--f|force : Create the class even if the job already exists}
-                            {--sync : Indicates that job should be synchronous}
+                            {--s|sync : Indicates that job should be synchronous}
                             {--t|test : Generate an accompanying Pest test for the job}';
 
     /**

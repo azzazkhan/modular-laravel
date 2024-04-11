@@ -14,7 +14,8 @@ class GenerateFactory extends Generator
     protected $signature = 'module:factory
                             {name : Name of the factory}
                             {--module= : Name of the module}
-                            {--m|model= : The name of the model}';
+                            {--m|model= : The name of the model}
+                            {--f|force= : Create the class even if the factory already exists}';
 
     /**
      * The console command description.
@@ -28,14 +29,6 @@ class GenerateFactory extends Generator
      */
     public function handle(): void
     {
-        // 1. Content/NovelFactory
-        // 2. Content, NovelFactory
-        // 3. Content, Novel
-        // 4. Models/Content/Novel
-        // 5. Content/Novel
-        // 6. Content, Novel
-
-
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'database/Factories');
         $namespace = $this->namespace(['Database\\Factories', $prefix]);
 

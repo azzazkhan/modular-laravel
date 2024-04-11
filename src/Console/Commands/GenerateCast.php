@@ -15,7 +15,7 @@ class GenerateCast extends Generator
                             {name : Name of the cast}
                             {--module= : Name of the module}
                             {--f|force : Create the class even if the cast already exists}
-                            {--inbound : Generate an inbound cast class}';
+                            {--i|inbound : Generate an inbound cast class}';
 
     /**
      * The console command description.

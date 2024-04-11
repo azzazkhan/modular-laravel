@@ -33,6 +33,7 @@ class GenerateController extends Generator
     public function handle(): void
     {
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Http/Controllers');
+        $class = str_remove_suffix($class, 'controller') . 'Controller';
         [$path, $namespace] = ["$path/$class.php", $this->namespace(['Http/Controllers', $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {
@@ -56,6 +57,22 @@ class GenerateController extends Generator
         $this->makeStub($stub)->withReplacements($replacements)->publish($path);
 
         $this->components->info("Controller [$path] created successfully.");
+
+        if ($this->isOptionEnabled('requests')) {
+            $name = ltrim("$prefix/$class", '/');
+
+            $this->call(GenerateRequest::class, [
+                'name' => $name . '/StoreRequest',
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+
+            $this->call(GenerateRequest::class, [
+                'name' => $name . '/UpdateRequest',
+                '--module' => $this->option('module'),
+                '--force' => $this->shouldForceCreate(),
+            ]);
+        }
 
         if ($this->isOptionEnabled('test')) {
             $this->call(GenerateTest::class, [

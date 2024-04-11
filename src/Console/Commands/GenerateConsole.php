@@ -16,8 +16,8 @@ class GenerateConsole extends Generator
     protected $signature = 'module:command
                             {name : The name of the command}
                             {--module= : Name of the module}
-                            {--f|force : Create the class even if the console command already exists}
                             {--command= : The terminal command that will be used to invoke the class}
+                            {--f|force : Create the class even if the console command already exists}
                             {--t|test : Generate an accompanying Pest test for the Console command}';
 
     /**
