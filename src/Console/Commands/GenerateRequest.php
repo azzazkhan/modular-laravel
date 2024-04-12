@@ -29,6 +29,7 @@ class GenerateRequest extends Generator
     public function handle(): void
     {
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Http/Requests');
+        $name = str_remove_suffix($class, 'request') . 'Request';
         [$path, $namespace] = ["$path/$class.php", $this->namespace(['Http\\Requests', $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {

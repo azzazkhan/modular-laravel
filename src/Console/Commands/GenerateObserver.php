@@ -32,15 +32,15 @@ class GenerateObserver extends Generator
     public function handle(): void
     {
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Observers');
-        $class = str_remove_suffix($class, 'observer');
-        [$path, $namespace] = ["$path/{$class}Observer.php", $this->namespace(['Observers', $prefix])];
+        $class = str_remove_suffix($class, 'observer') . 'Observer';
+        [$path, $namespace] = ["$path/$class.php", $this->namespace(['Observers', $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {
             return;
         }
 
         $stub = 'observer.plain';
-        $replacements = ['class' => $class . 'Observer', 'namespace' => $namespace];
+        $replacements = ['class' => $class, 'namespace' => $namespace];
 
         if ($model = $this->option('model')) {
             $stub = 'observer';

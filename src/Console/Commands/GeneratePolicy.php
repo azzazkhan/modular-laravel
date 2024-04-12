@@ -33,8 +33,8 @@ class GeneratePolicy extends Generator
     public function handle(): void
     {
         [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Policies');
-        $class = $this->normalizePolicyName($class);
-        [$path, $namespace] = ["$path/{$class}Policy.php", $this->namespace(['Policies', $prefix])];
+        $class = $this->normalizePolicyName($class) . 'Policy';
+        [$path, $namespace] = ["$path/$class.php", $this->namespace(['Policies', $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {
             return;
@@ -42,7 +42,7 @@ class GeneratePolicy extends Generator
 
         $stub = 'policy.plain';
         $replacements = [
-            'class' => $class . 'Policy',
+            'class' => $class,
             'namespace' => $namespace,
             'user' => $user_class = 'User',
             'user_namespace' => User::class,
