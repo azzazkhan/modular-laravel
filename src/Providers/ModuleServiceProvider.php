@@ -8,6 +8,8 @@ use Illuminate\Support\ServiceProvider;
 
 class ModuleServiceProvider extends ServiceProvider
 {
+    const string NAMESPACE = 'Modules';
+
     /**
      * Register services.
      */
@@ -18,24 +20,23 @@ class ModuleServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             /** @var array<class-string> $commands */
             $commands = collect(File::glob(__DIR__ . '/../Console/Commands/*.php'))
-                ->map(fn (string $path) => substr(last(explode('/', $path)), 0, -4))
-                ->filter(fn (string $class) => $class != 'Generator')
-                ->map(fn (string $class) => "Azzazkhan\\ModularLaravel\\Console\\Commands\\$class")
+                ->map(fn(string $path) => substr(last(explode('/', $path)), 0, -4))
+                ->filter(fn(string $class) => $class != 'Generator')
+                ->map(fn(string $class) => "Azzazkhan\\ModularLaravel\\Console\\Commands\\$class")
                 ->toArray();
 
             $this->commands($commands);
         }
 
-
-        $namespace = config('modules.namespace', 'Modules');
+        $namespace = self::NAMESPACE;
         $filepath = base_path('modules/{name}/app/Providers/{name}ServiceProvider.php');
         $namespace = "$namespace\\{name}\\Providers\\{name}ServiceProvider";
 
         collect(File::glob(base_path('modules/*')))
-            ->map(fn (string $path) => last(explode('/', $path)))
-            ->filter(fn (string $name) => File::exists(str_replace('{name}', $name, $filepath)))
-            ->map(fn (string $name) => str_replace('{name}', $name, $namespace))
-            ->each(fn (string $provider) => $this->app->register($provider));
+            ->map(fn(string $path) => last(explode('/', $path)))
+            ->filter(fn(string $name) => File::exists(str_replace('{name}', $name, $filepath)))
+            ->map(fn(string $name) => str_replace('{name}', $name, $namespace))
+            ->each(fn(string $provider) => $this->app->register($provider));
     }
 
     /**
@@ -43,8 +44,6 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->publishes([
-            __DIR__ . '/../config.php' => config_path('modules.php'),
-        ], 'modules-config');
+        //
     }
 }

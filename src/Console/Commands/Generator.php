@@ -5,6 +5,7 @@ namespace Azzazkhan\ModularLaravel\Console\Commands;
 use Azzazkhan\ModularLaravel\Concerns\InteractsWithFiles;
 use Azzazkhan\ModularLaravel\Factories\Stub;
 use Azzazkhan\ModularLaravel\Factories\StubModule;
+use Azzazkhan\ModularLaravel\Providers\ModuleServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
@@ -22,7 +23,7 @@ abstract class Generator extends Command
     {
         parent::__construct();
 
-        static::$rootNamespace ??= config('modules.namespace', 'Modules');
+        static::$rootNamespace ??= ModuleServiceProvider::NAMESPACE;
         static::$rootDirectory ??= Str::kebab(static::$rootNamespace);
     }
 
@@ -39,7 +40,7 @@ abstract class Generator extends Command
     /**
      * Check if the provided option is enabled.
      *
-     * @param  string  $name
+     * @param string $name
      * @return bool
      */
     protected function isOptionEnabled(string $name): bool
@@ -99,7 +100,7 @@ abstract class Generator extends Command
     }
 
     /**
-     * @param  string  $name
+     * @param string $name
      * @return \Azzazkhan\ModularLaravel\Factories\Stub
      */
     protected function makeStub(string $name): Stub
@@ -118,16 +119,16 @@ abstract class Generator extends Command
     }
 
     /**
-     * @param  string|array|null  $append
-     * @param  string|null  $separator
+     * @param string|array|null $append
+     * @param string|null $separator
      * @return string
      */
     protected function namespace(string|array $append = null, string $separator = null): string
     {
         if (is_array($append)) {
             $append = collect($append)
-                ->filter(fn (string $chunk) => strlen($chunk))
-                ->map(fn (string $chunk) => trim(str_replace('/', '\\', $chunk), '\\'))
+                ->filter(fn(string $chunk) => strlen($chunk))
+                ->map(fn(string $chunk) => trim(str_replace('/', '\\', $chunk), '\\'))
                 ->join('\\');
         }
 
