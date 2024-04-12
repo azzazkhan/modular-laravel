@@ -4,6 +4,7 @@ namespace {{ namespace }};
 
 use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class {{ class }} extends ServiceProvider
@@ -32,14 +33,22 @@ class {{ class }} extends ServiceProvider
         $this->commands([]);
 
         $this->registerScheduledTasks();
+        $this->registerEventListeners();
     }
 
     /**
      * Register scheduled tasks.
      */
      protected function registerScheduledTasks(): void {
-        $this->app->booted(function () {
-            // Schedule::command('inspire')->daily();
-        });
+         $this->app->booted(function () {
+             // Schedule::command('inspire')->daily();
+         });
+     }
+
+    /**
+     * Register event listeners.
+     */
+     protected function registerEventListeners(): void {
+         // Event::listen([PodcastCreated::class, PodcastUpdated::class], ProcessPodcast::class);
      }
 }
