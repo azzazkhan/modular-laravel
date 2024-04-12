@@ -85,7 +85,7 @@ class GenerateComponent extends Generator
             $this->components->info("Component [$component_path] created successfully.");
         }
 
-        $this->call('module:view', ['name' => $view_name, '--module' => $this->option('module'), '--force' => true]);
+        $this->call(GenerateView::class, ['name' => $view_name, '--module' => $this->option('module'), '--force' => true]);
 
         if ($this->isOptionEnabled('test')) {
             $this->call(GenerateTest::class, [

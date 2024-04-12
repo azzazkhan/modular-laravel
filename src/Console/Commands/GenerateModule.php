@@ -35,11 +35,25 @@ class GenerateModule extends Generator
         }
 
         $this->ensureModuleDirectoriesExists();
-
+        $this->publishComposerJson();
         $this->publishServiceProviders();
         $this->publishConfig();
-        $this->publishComposerJson();
         $this->publishRoutes();
+    }
+
+    protected function publishComposerJson(): void
+    {
+        $replacements = [
+            'module_namespace' => $this->namespace(separator: '\\\\\\\\'),
+        ];
+
+        $this->makeStub('composer')->withReplacements($replacements)->publish('composer.json');
+
+        $this->components->info('File [composer.json] created successfully.');
+
+        system('composer dump-autoload --ignore-platform-reqs --no-scripts --quiet');
+
+        $this->components->info('Composer autoloading files dumped successfully');
     }
 
     protected function publishServiceProviders(): void
@@ -67,17 +81,6 @@ class GenerateModule extends Generator
         $this->makeStub('config')->publish($path = 'config/' . $this->moduleKey() . '.php');
 
         $this->components->info("Config [$path] created successfully.");
-    }
-
-    protected function publishComposerJson(): void
-    {
-        $replacements = [
-            'module_namespace' => $this->namespace(separator: '\\\\\\\\'),
-        ];
-
-        $this->makeStub('composer')->withReplacements($replacements)->publish('composer.json');
-
-        $this->components->info('File [composer.json] created successfully.');
     }
 
     protected function publishRoutes(): void
