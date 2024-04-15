@@ -18,7 +18,7 @@ class GenerateComponent extends Generator
                             {name : Name of the component}
                             {--module= : Name of the module}
                             {--f|force : Create the class even if the component already exists}
-                            {--i|inline :  Create a component that renders an inline view}
+                            {--i|inline : Create a component that renders an inline view}
                             {--v|view : Create an anonymous component with only a view}
                             {--t|test : Generate an accompanying Pest test for the component}';
 
@@ -35,15 +35,15 @@ class GenerateComponent extends Generator
     public function handle(): void
     {
         $name = explode('/', str_replace('.', '/', $this->argument('name')));
-        $name = collect($name)->filter()->map(fn(string $segment) => Str::studly($segment))->join('/');
+        $name = collect($name)->filter()->map(fn (string $segment) => Str::studly($segment))->join('/');
 
         [$class, $path, $prefix] = $this->extractClassDetails($name, 'app/View/Components');
         [$component_path, $namespace] = ["$path/$class.php", $this->namespace(['View\\Components', $prefix])];
 
         $view_path = explode('/', ltrim("$prefix/$class", '/'));
-        $view_path = array_map(fn(string $segment) => ltrim(rtrim($segment, '/'), '/'), $view_path);
-        $view_path = array_filter($view_path, fn(string $segment) => strlen($segment) > 0);
-        $view_path = array_map(fn(string $segment) => Str::kebab($segment), $view_path);
+        $view_path = array_map(fn (string $segment) => ltrim(rtrim($segment, '/'), '/'), $view_path);
+        $view_path = array_filter($view_path, fn (string $segment) => strlen($segment) > 0);
+        $view_path = array_map(fn (string $segment) => Str::kebab($segment), $view_path);
         $view_path = 'components/' . implode('/', $view_path);
         $view_name = str_replace('/', '.', $view_path);
         $view_path = "resources/views/$view_path.blade.php";

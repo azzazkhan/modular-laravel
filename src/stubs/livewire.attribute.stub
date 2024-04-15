@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+
+use Livewire\Attribute as LivewireAttribute;
+
+#[\Attribute]
+class {{ class }} extends LivewireAttribute
+{
+    //
+}
