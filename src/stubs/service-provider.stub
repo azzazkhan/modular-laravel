@@ -39,7 +39,7 @@ class {{ class }} extends ServiceProvider
     public function register(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
-        $this->mergeConfigFrom(__DIR__ . '/../../config/user.php', '{{ module_key }}');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/{{ module_key }}.php', '{{ module_key }}');
         $this->loadTranslationsFrom(__DIR__ . '/../../lang', '{{ module_key }}');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', '{{ module_key }}');
 
