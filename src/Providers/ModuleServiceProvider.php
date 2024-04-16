@@ -20,9 +20,9 @@ class ModuleServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             /** @var array<class-string> $commands */
             $commands = collect(File::glob(__DIR__ . '/../Console/Commands/*.php'))
-                ->map(fn(string $path) => substr(last(explode('/', $path)), 0, -4))
-                ->filter(fn(string $class) => $class != 'Generator')
-                ->map(fn(string $class) => "Azzazkhan\\ModularLaravel\\Console\\Commands\\$class")
+                ->map(fn (string $path) => substr(last(explode('/', $path)), 0, -4))
+                ->filter(fn (string $class) => $class != 'Generator')
+                ->map(fn (string $class) => "Azzazkhan\\ModularLaravel\\Console\\Commands\\$class")
                 ->toArray();
 
             $this->commands($commands);
@@ -33,10 +33,10 @@ class ModuleServiceProvider extends ServiceProvider
         $namespace = "$namespace\\{name}\\Providers\\{name}ServiceProvider";
 
         collect(File::glob(base_path('modules/*')))
-            ->map(fn(string $path) => last(explode('/', $path)))
-            ->filter(fn(string $name) => File::exists(str_replace('{name}', $name, $filepath)))
-            ->map(fn(string $name) => str_replace('{name}', $name, $namespace))
-            ->each(fn(string $provider) => $this->app->register($provider));
+            ->map(fn (string $path) => last(explode('/', $path)))
+            ->filter(fn (string $module) => File::exists(str_replace('{name}', $module, $filepath)))
+            ->map(fn (string $module) => str_replace('{name}', $module, $namespace))
+            ->each(fn (string $provider) => $this->app->register($provider));
     }
 
     /**

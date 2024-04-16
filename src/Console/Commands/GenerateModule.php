@@ -62,7 +62,7 @@ class GenerateModule extends Generator
 
         $this->makeStub('service-provider')->withReplacements([
             'namespace' => $this->namespace('Providers'),
-            'components_namespace' => $this->namespace('Views\\Components', separator: '\\\\\\\\'),
+            'components_namespace' => $this->namespace('Views\\\\Components', separator: '\\\\\\\\'),
             'class' => "{$module}ServiceProvider",
         ])->publish($path = "app/Providers/{$module}ServiceProvider.php");
 

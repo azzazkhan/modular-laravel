@@ -4,6 +4,9 @@ namespace {{ namespace }};
 
 // use Illuminate\Support\Facades\Schedule;
 use Azzazkhan\ModularLaravel\Providers\ServiceProvider;
+use Azzazkhan\ModularLaravel\Services\LivewireService;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class {{ class }} extends ServiceProvider
 {
@@ -35,7 +38,16 @@ class {{ class }} extends ServiceProvider
      */
     public function register(): void
     {
-        parent::register();
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/user.php', '{{ module_key }}');
+        $this->loadTranslationsFrom(__DIR__ . '/../../lang', '{{ module_key }}');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', '{{ module_key }}');
+
+        $this->app->register(RouteServiceProvider::class);
+
+        $this->app->afterResolving(BladeCompiler::class, function () {
+            LivewireService::registerForModule('{{ module_key }}');
+        });
     }
 
     /**
@@ -43,7 +55,13 @@ class {{ class }} extends ServiceProvider
      */
     public function boot(): void
     {
-        parent::boot();
+        if (is_dir($dir = __DIR__ . '/../../resources/views/components')) {
+            Blade::anonymousComponentPath($dir, '{{ module_key }}');
+        }
+
+        Blade::componentNamespace('{{ components_namespace }}', '{{ module_key }}');
+
+        $this->bootModule();
 
         $this->commands([]);
     }

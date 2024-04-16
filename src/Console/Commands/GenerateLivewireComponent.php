@@ -72,7 +72,7 @@ class GenerateLivewireComponent extends Generator
             $this->call(GenerateView::class, ['name' => $view_name, '--module' => $this->option('module'), '--force' => true]);
         }
 
-        $this->components->info(sprintf('Tag [<livewire:%s/>]', $replacements['view']));
+        $this->components->info(sprintf('Tag <livewire:%s::%s />', $this->moduleKey(), substr($view_name, 9)));
 
 
         if ($this->isOptionEnabled('test')) {
