@@ -2,13 +2,10 @@
 
 namespace Azzazkhan\ModularLaravel\Providers;
 
-use Azzazkhan\ModularLaravel\Services\LivewireService;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Illuminate\View\Compilers\BladeCompiler;
 
 abstract class ServiceProvider extends BaseServiceProvider
 {
@@ -34,40 +31,6 @@ abstract class ServiceProvider extends BaseServiceProvider
      * @var array<class-string, class-string>
      */
     protected array $policies = [];
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $module = static::MODULE;
-        $module_path = module_path($module, abs: true);
-
-        $this->loadMigrationsFrom($module_path . '/database/migrations');
-        $this->mergeConfigFrom($module_path . '/config/user.php', $module);
-        $this->loadTranslationsFrom($module_path . '/lang', $module);
-        $this->loadViewsFrom($module_path . '/resources/views', $module);
-
-        $this->app->register(module_namespace($module, "Providers\\RouteServiceProvider"));
-
-        $this->app->afterResolving(BladeCompiler::class, function () use ($module) {
-            LivewireService::registerForModule($module);
-        });
-    }
-
-    /**
-     * Bootstrap services.
-     */
-    public function boot(): void
-    {
-        $module = static::MODULE;
-        if (is_dir($component_dir = module_path($module, 'resources/views/components', abs: true))) {
-            Blade::anonymousComponentPath($component_dir, $module);
-        }
-
-        Blade::componentNamespace(module_namespace($module, 'Views\\Components'), $module);
-
-    }
 
     /**
      * Boot the module.
