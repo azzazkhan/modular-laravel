@@ -29,7 +29,7 @@ class GenerateFactory extends Generator
      */
     public function handle(): void
     {
-        [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'database/Factories');
+        [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'database/factories');
         $namespace = $this->namespace(['Database\\Factories', $prefix]);
 
         $class = $this->normalizeFactoryName($class);
@@ -77,7 +77,7 @@ class GenerateFactory extends Generator
         if ($model = $this->option('model')) {
             $model = preg_match('/^(models\/).+/i', $model) ? substr($model, 7) : $model;
 
-            [$model, , $model_prefix] = $this->extractClassDetails($model);
+            [$model,, $model_prefix] = $this->extractClassDetails($model);
 
             return [$model, $this->namespace(['Models', $model_prefix])];
         }
