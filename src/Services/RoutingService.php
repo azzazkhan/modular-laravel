@@ -58,8 +58,8 @@ readonly class RoutingService
      */
     public function registerApiRoutes(array|string|Closure $routes, string $name = ''): void
     {
-        $subdomain = config('app.api-subdomain');
-        $router = $subdomain ? Route::domain($subdomain) : Route::prefix('api');
+        $domain = config('app.api.domain');
+        $router = $domain ? Route::domain($domain) : Route::prefix('api');
 
         $router->middleware('api')->name($name)->group($routes);
     }
