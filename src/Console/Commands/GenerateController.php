@@ -12,10 +12,10 @@ class GenerateController extends Generator
      * @var string
      */
     protected $signature = 'module:controller
-                            {name : Name of the Eloquent model}
+                            {name : Name of the controller}
                             {--module= : Name of the module}
                             {--f|force : Create the class even if the controller already exists}
-                            {--api : Create a new controller for the model}
+                            {--api : Exclude the create and edit methods from the controller}
                             {--i|invokable :  Generate a single method, invokable controller class}
                             {--r|requests : Generate FormRequest classes for store and update}
                             {--t|test : Generate an accompanying Pest test for the controller}';
