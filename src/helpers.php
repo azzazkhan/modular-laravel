@@ -76,7 +76,7 @@ if (!function_exists('str_remove_prefix')) {
 
 if (!function_exists('str_remove_suffix')) {
     /**
-     * Removes specified prefix from end the provided string.
+     * Removes specified suffix from end the provided string.
      *
      * @param string $string
      * @param string $suffix
