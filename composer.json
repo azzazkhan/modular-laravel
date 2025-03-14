@@ -4,14 +4,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Azzaz Khan",
+            "name": "Azzaz",
             "email": "hello@azzaz.dev"
         }
     ],
     "require": {
         "php": "^8.3",
         "archtechx/enums": "^1.0",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^11.0|^12.0",
         "livewire/livewire": "^3.0",
         "wikimedia/composer-merge-plugin": "^2.1"
     },

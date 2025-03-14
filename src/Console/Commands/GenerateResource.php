@@ -29,9 +29,9 @@ class GenerateResource extends Generator
      */
     public function handle(): void
     {
-        [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Resources');
+        [$class, $path, $prefix] = $this->extractClassDetails($this->argument('name'), 'app/Http/Resources');
         $class = str_remove_suffix($class, 'resource') . 'Resource';
-        [$path, $namespace] = ["$path/$class.php", $this->namespace(['Resources', $prefix])];
+        [$path, $namespace] = ["$path/$class.php", $this->namespace(['Http/Resources', $prefix])];
 
         if (!$this->validateModuleExistence() || !$this->validateFileAbsence($path)) {
             return;
